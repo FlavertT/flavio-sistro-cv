@@ -1,4 +1,6 @@
-// Datos del CV
+// ============================================
+// 1. DATOS DEL CV (ÚNICA FUENTE DE VERDAD)
+// ============================================
 const cvData = {
     nombre: "Flavio Sistro",
     titulo: "Desarrollador en Formación | Narrativa Audiovisual",
@@ -7,10 +9,57 @@ const cvData = {
     github: "FlavertT",
     linkedin: "flavertptuntomov",
     ubicacion: "La Plata, Argentina",
-    habilidades: ["Programación en C", "SQL", "Python", "HTML5", "CSS3", "JavaScript"]
+    habilidades: ["Programación en C", "SQL", "Python", "HTML5", "CSS3", "JavaScript"]  // ← En inglés
 };
 
-// ========== FUNCIÓN PARA LA PANTALLA DE CARGA CON VIDEO ==========
+// ============================================
+// 2. FUNCIONES DE CARGA DE DATOS
+// ============================================
+
+// Cargar datos del CV al HTML
+function cargarDatosCV() {
+    const nombreElement = document.getElementById('nombre');
+    if (nombreElement) nombreElement.textContent = cvData.nombre;
+    
+    const tituloElement = document.querySelector('.titulo');
+    if (tituloElement) tituloElement.textContent = cvData.titulo;
+    
+    const telefonoElement = document.querySelector('#telefono .contact-value');
+    if (telefonoElement) telefonoElement.textContent = cvData.telefono;
+    
+    const emailElement = document.querySelector('#email .contact-value');
+    if (emailElement) emailElement.textContent = cvData.email;
+    
+    const linkedinElement = document.querySelector('#linkedin .contact-value');
+    if (linkedinElement) linkedinElement.textContent = cvData.linkedin;
+    
+    const githubElement = document.querySelector('#github .contact-value');
+    if (githubElement) githubElement.textContent = cvData.github;
+    
+    const ubicacionElement = document.querySelector('#ubicacion .contact-value');
+    if (ubicacionElement) ubicacionElement.textContent = cvData.ubicacion;
+}
+
+// Cargar habilidades (EN INGLÉS como vos querés)
+function cargarHabilidades() {
+    const container = document.getElementById('skills-container');
+    if (container) {
+        container.innerHTML = '';
+        cvData.habilidades.forEach(habilidad => {
+            const tag = document.createElement('div');
+            tag.className = 'skill-tag';
+            tag.textContent = habilidad;  // ← Se muestra en inglés
+            tag.addEventListener('click', () => mostrarAlerta(`Skill: ${habilidad}`, 'info'));
+            container.appendChild(tag);
+        });
+    }
+}
+
+// ============================================
+// 3. FUNCIONES DE INTERACCIÓN
+// ============================================
+
+// Pantalla de carga con video
 function initIntroVideo() {
     const loadingScreen = document.getElementById('loading-screen');
     const introVideo = document.getElementById('intro-video');
@@ -32,18 +81,15 @@ function initIntroVideo() {
     
     if (introVideo) {
         introVideo.addEventListener('ended', hideIntro);
-        
-        // Para activar sonido después de interacción del usuario
         document.body.addEventListener('click', () => {
             introVideo.muted = false;
         }, { once: true });
     }
     
-    // Timeout de seguridad: si el video no termina en 10 segundos, se cierra igual
     setTimeout(hideIntro, 10000);
 }
 
-// ========== FUNCIÓN PARA OBTENER DATOS DE GITHUB ==========
+// Obtener datos de GitHub
 async function obtenerGitHubStats() {
     const username = cvData.github;
     const repoCountElement = document.getElementById('repo-count');
@@ -96,21 +142,6 @@ function actualizarContadorVisitas() {
     const footerText = document.querySelector('.footer-text');
     if (footerText && !footerText.innerHTML.includes('Visitas:')) {
         footerText.innerHTML += ` | Visitas: ${visitas}`;
-    }
-}
-
-// Cargar habilidades
-function cargarHabilidades() {
-    const container = document.getElementById('skills-container');
-    if (container) {
-        container.innerHTML = '';
-        cvData.habilidades.forEach(habilidad => {
-            const tag = document.createElement('div');
-            tag.className = 'skill-tag';
-            tag.textContent = habilidad;
-            tag.addEventListener('click', () => mostrarAlerta(`Habilidad: ${habilidad}`, 'info'));
-            container.appendChild(tag);
-        });
     }
 }
 
@@ -219,7 +250,6 @@ function initContactForm() {
         mostrarAlerta(`¡Gracias ${nombre}! Tu mensaje ha sido enviado.`, 'success');
         form.reset();
         
-        // Guardar en localStorage
         const mensajes = JSON.parse(localStorage.getItem('mensajes_contacto') || '[]');
         mensajes.push({
             nombre,
@@ -235,7 +265,7 @@ function initContactForm() {
 // Efecto de escritura
 function efectoEscritura() {
     const titulo = document.querySelector('.titulo');
-    if (titulo) {
+    if (titulo && titulo.textContent) {
         const texto = titulo.textContent;
         titulo.textContent = '';
         let i = 0;
@@ -299,17 +329,81 @@ function initInteractiveEffects() {
     }
 }
 
-// ========== INICIALIZACIÓN CUANDO EL DOM ESTÁ LISTO ==========
+// Lazy loading para videos
+function initLazyVideos() {
+    const videoPlaceholders = document.querySelectorAll('.video-placeholder');
+    if (videoPlaceholders.length === 0) return;
+
+    function loadYouTubePlayer(placeholder) {
+        const videoId = placeholder.getAttribute('data-video-id');
+        if (!videoId || placeholder.hasAttribute('data-loaded')) return;
+        placeholder.setAttribute('data-loaded', 'true');
+
+        const loader = placeholder.querySelector('.video-loader');
+        if (loader) loader.style.display = 'flex';
+
+        setTimeout(() => {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.title = "EL VUELO DEL MOSCARDÓN | Tráiler";
+            iframe.frameBorder = "0";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allowFullscreen = true;
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.position = "absolute";
+            iframe.style.top = "0";
+            iframe.style.left = "0";
+
+            placeholder.innerHTML = '';
+            placeholder.appendChild(iframe);
+            placeholder.classList.add('video-loaded');
+        }, 100);
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    loadYouTubePlayer(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '200px',
+            threshold: 0.1
+        });
+
+        videoPlaceholders.forEach(placeholder => {
+            observer.observe(placeholder);
+            placeholder.addEventListener('click', () => loadYouTubePlayer(placeholder));
+        });
+    } else {
+        // Fallback para navegadores antiguos: cargar al clic (si no se puede observar)
+        videoPlaceholders.forEach(placeholder => {
+            placeholder.addEventListener('click', () => loadYouTubePlayer(placeholder));
+        });
+    }
+}
+
+
+// ============================================
+// 4. INICIALIZACIÓN
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Iniciar pantalla de carga con video
-    initIntroVideo();
+    // 1. Cargar datos del CV
+    cargarDatosCV();
     
-    // Cargar datos
+    // 2. Cargar habilidades (EN INGLÉS)
     cargarHabilidades();
+    
+    // 3. Contador y GitHub
     actualizarContadorVisitas();
     obtenerGitHubStats();
     
-    // Inicializar funciones
+    // 4. Pantalla de carga
+    initIntroVideo();
+    
+    // 5. Interacciones
     initThemeToggle();
     initPDFDownload();
     initContactForm();
@@ -317,13 +411,16 @@ document.addEventListener('DOMContentLoaded', () => {
     initSocialTooltips();
     initProgressBars();
     initInteractiveEffects();
+    initLazyVideos();
     
-    // Mensaje de bienvenida
+    // 6. Mensaje de bienvenida
     setTimeout(() => {
         mostrarAlerta(`¡Bienvenido al CV de ${cvData.nombre}!`, 'success');
     }, 1200);
 });
 
-// Exportar para uso global
+// ============================================
+// 5. EXPORTAR PARA USO GLOBAL
+// ============================================
 window.cvData = cvData;
 window.mostrarAlerta = mostrarAlerta;

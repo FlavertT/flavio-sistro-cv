@@ -28,13 +28,22 @@ function cargarDatosCV() {
     if (telefonoElement) telefonoElement.textContent = cvData.telefono;
     
     const emailElement = document.querySelector('#email .contact-value');
-    if (emailElement) emailElement.textContent = cvData.email;
+    if (emailElement) {
+        emailElement.href = `mailto:${cvData.email}`;
+        emailElement.textContent = cvData.email;
+    }
     
     const linkedinElement = document.querySelector('#linkedin .contact-value');
-    if (linkedinElement) linkedinElement.textContent = cvData.linkedin;
+    if (linkedinElement) {
+        linkedinElement.href = `https://www.linkedin.com/in/${cvData.linkedin}/`;
+        linkedinElement.textContent = cvData.linkedin;
+    }
     
     const githubElement = document.querySelector('#github .contact-value');
-    if (githubElement) githubElement.textContent = cvData.github;
+    if (githubElement) {
+        githubElement.href = `https://github.com/${cvData.github}/`;
+        githubElement.textContent = cvData.github;
+    }
     
     const ubicacionElement = document.querySelector('#ubicacion .contact-value');
     if (ubicacionElement) ubicacionElement.textContent = cvData.ubicacion;
@@ -344,16 +353,21 @@ function initLazyVideos() {
 
         setTimeout(() => {
             const iframe = document.createElement('iframe');
-            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1`;
             iframe.title = "EL VUELO DEL MOSCARDÓN | Tráiler";
             iframe.frameBorder = "0";
-            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+            iframe.allow = "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
             iframe.allowFullscreen = true;
             iframe.style.width = "100%";
             iframe.style.height = "100%";
             iframe.style.position = "absolute";
             iframe.style.top = "0";
             iframe.style.left = "0";
+
+            // Agregar manejo de errores
+            iframe.onerror = function() {
+                placeholder.innerHTML = '<div style="color: white; text-align: center; padding: 20px;">Error al cargar el video. Verifica que el enlace sea correcto.</div>';
+            };
 
             placeholder.innerHTML = '';
             placeholder.appendChild(iframe);

@@ -67,6 +67,26 @@ body.dark-theme {
     --shadow: 0 1rem 3rem rgba(0,0,0,0.45);
 }
 
+/* ========== ENLACES ========== */
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--color-secondary);
+}
+
+a:active {
+    color: var(--color-primary);
+}
+
 /* ========== BODY ========== */
 body {
     font-family: 'Poppins', sans-serif;
@@ -527,12 +547,25 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 4rem;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    transition: transform 0.3s ease;
+    font-size: 6rem;
+    color: #FF0000;
+    text-shadow: 0 0 20px rgba(0,0,0,0.7);
+    transition: all 0.3s ease;
     cursor: pointer;
     z-index: 2;
+    background: rgba(0,0,0,0.8);
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #FF0000;
+}
+
+.play-button i {
+    font-size: 2.5rem;
+    margin-left: 0.3rem; /* Para centrar el triángulo */
 }
 
 .play-button:hover {

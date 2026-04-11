@@ -2,6 +2,7 @@
 // 1. DATOS DEL CV (ÚNICA FUENTE DE VERDAD)
 // ============================================
 const cvData = {
+    // Datos personales
     nombre: "Flavio Sistro",
     titulo: "Desarrollador en Formación | Narrativa Audiovisual",
     email: "fsistro@gmail.com",
@@ -9,66 +10,226 @@ const cvData = {
     github: "FlavertT",
     linkedin: "flavertptuntomov",
     ubicacion: "La Plata, Argentina",
-    habilidades: ["Programación en C", "SQL", "Python", "HTML5", "CSS3", "JavaScript"]  // ← En inglés
+    
+    // Habilidades
+    habilidades: ["Programación en C", "SQL", "Python", "HTML5", "CSS3", "JavaScript"],
+    
+    // Idiomas
+    idiomas: [
+        { nombre: "Español", nivel: 100, texto: "Nativo" },
+        { nombre: "Inglés", nivel: 75, texto: "Intermedio" }
+    ],
+    
+    // Certificaciones
+    certificaciones: [
+        {
+            titulo: "El Vuelo del Moscardón",
+            descripcion: "Película de interés Provincial",
+            link: "https://www.youtube.com/watch?v=eY4jXLyNNV0",
+            linkTexto: "Ver tráiler"
+        }
+    ],
+    
+    // Experiencia laboral
+    experiencia: [
+        {
+            puesto: "Camarógrafo - Flavertt",
+            periodo: "marzo de 2018 - Presente (8 años 1 mes)",
+            ubicacion: "Provincia de Buenos Aires, Argentina",
+            tareas: [
+                "Gestión de proyectos audiovisuales desde la preproducción hasta la entrega final",
+                "Cumplimiento de plazos y expectativas del cliente",
+                "Coordinación de equipos de trabajo y recursos técnicos"
+            ]
+        }
+    ],
+    
+    // Educación
+    educacion: [
+        {
+            titulo: "Tecnicatura en Programación",
+            fecha: "2024 - diciembre de 2027",
+            institucion: "Universidad Tecnológica Nacional (UTN)"
+        },
+        {
+            titulo: "Licenciatura en Artes Audiovisuales",
+            fecha: "marzo de 2012 - octubre de 2024",
+            institucion: "Facultad de Artes",
+            subtitulo: "Comunicación y Marketing"
+        }
+    ],
+    
+    // Proyectos destacados
+    proyectos: [
+        {
+            titulo: "Sistema de Gestión de Proyectos",
+            descripcion: "Desarrollo de una aplicación web para la gestión de proyectos audiovisuales, incluyendo seguimiento de tareas, calendario de producción y gestión de recursos.",
+            tecnologias: ["Python", "SQL", "Flask"]
+        },
+        {
+            titulo: "Portfolio Interactivo",
+            descripcion: "Creación de un portfolio personal con animaciones y diseño responsive, mostrando trabajos audiovisuales y proyectos de programación.",
+            tecnologias: ["HTML5", "CSS3", "JavaScript"]
+        }
+    ],
+    
+    // Videos
+    videos: {
+        moscardon: {
+            titulo: '"El Vuelo del Moscardón" - Tráiler Oficial',
+            badge: "🏆 Película de interés Provincial",
+            descripcion: "Una producción audiovisual que captura la esencia y las tradiciones de nuestra provincia. Reconocida por su valor cultural y artístico.",
+            tags: ["Largometraje", "Documental", "Dirección", "2025"],
+            videoId: "eY4jXLyNNV0"
+        },
+        toyota: {
+            titulo: "Planta Automatizada Toyota",
+            badge: "📅 Febrero 2026",
+            empresa: "Toyota Argentina",
+            descripcion: "Trabajo audiovisual realizado en la planta automatizada de Toyota, documentando procesos de automatización industrial, líneas de ensamblaje y control de calidad.",
+            tags: ["Industria 4.0", "Automatización", "Toyota", "Producción Industrial", "Febrero 2026"],
+            archivo: "TOYOTA1.mp4",
+            poster: "toyuta.png"
+        }
+    }
 };
 
 // ============================================
-// 2. FUNCIONES DE CARGA DE DATOS
+// 2. FUNCIÓN QUE CARGA TODO EL CONTENIDO
 // ============================================
-
-// Cargar datos del CV al HTML
-function cargarDatosCV() {
-    const nombreElement = document.getElementById('nombre');
-    if (nombreElement) nombreElement.textContent = cvData.nombre;
+function cargarTodoElContenido() {
+    // Header
+    document.getElementById('nombre').textContent = cvData.nombre;
+    document.querySelector('.titulo').textContent = cvData.titulo;
     
-    const tituloElement = document.querySelector('.titulo');
-    if (tituloElement) tituloElement.textContent = cvData.titulo;
+    // Contacto
+    document.querySelector('#telefono .contact-value').textContent = cvData.telefono;
+    const emailLink = document.querySelector('#email .contact-value');
+    emailLink.href = `mailto:${cvData.email}`;
+    emailLink.textContent = cvData.email;
+    const linkedinLink = document.querySelector('#linkedin .contact-value');
+    linkedinLink.href = `https://www.linkedin.com/in/${cvData.linkedin}/`;
+    linkedinLink.textContent = cvData.linkedin;
+    const githubLink = document.querySelector('#github .contact-value');
+    githubLink.href = `https://github.com/${cvData.github}/`;
+    githubLink.textContent = cvData.github;
+    document.querySelector('#ubicacion .contact-value').textContent = cvData.ubicacion;
     
-    const telefonoElement = document.querySelector('#telefono .contact-value');
-    if (telefonoElement) telefonoElement.textContent = cvData.telefono;
+    // Habilidades
+    const skillsContainer = document.getElementById('skills-container');
+    skillsContainer.innerHTML = '';
+    cvData.skilss.forEach(habilidad => {
+        const tag = document.createElement('div');
+        tag.className = 'skill-tag';
+        tag.textContent = habilidad;
+        tag.addEventListener('click', () => mostrarAlerta(`Skill: ${habilidad}`, 'info'));
+        skillsContainer.appendChild(tag);
+    });
     
-    const emailElement = document.querySelector('#email .contact-value');
-    if (emailElement) {
-        emailElement.href = `mailto:${cvData.email}`;
-        emailElement.textContent = cvData.email;
+    // Idiomas (usando <progress>)
+    const idiomasContainer = document.querySelector('.left-column .section:nth-child(3)');
+    if (idiomasContainer) {
+        idiomasContainer.innerHTML = `
+            <h2><i class="fas fa-language"></i> Idiomas</h2>
+            ${cvData.idiomas.map(idioma => `
+                <div class="language-item">
+                    <span>${idioma.nombre}</span>
+                    <progress class="language-progress" value="${idioma.nivel}" max="100">${idioma.nivel}%</progress>
+                    <span>${idioma.texto}</span>
+                </div>
+            `).join('')}
+        `;
     }
     
-    const linkedinElement = document.querySelector('#linkedin .contact-value');
-    if (linkedinElement) {
-        linkedinElement.href = `https://www.linkedin.com/in/${cvData.linkedin}/`;
-        linkedinElement.textContent = cvData.linkedin;
+    // Certificaciones
+    const certificacionesContainer = document.querySelector('.certification-item');
+    if (certificacionesContainer && cvData.certificaciones[0]) {
+        certificacionesContainer.innerHTML = `
+            <p><strong>"${cvData.certificaciones[0].titulo}"</strong></p>
+            <p>${cvData.certificaciones[0].descripcion}</p>
+            <a href="${cvData.certificaciones[0].link}" target="_blank" rel="noopener noreferrer" class="watch-link">
+                <i class="fab fa-youtube"></i> ${cvData.certificaciones[0].linkTexto}
+            </a>
+        `;
     }
     
-    const githubElement = document.querySelector('#github .contact-value');
-    if (githubElement) {
-        githubElement.href = `https://github.com/${cvData.github}/`;
-        githubElement.textContent = cvData.github;
+    // Experiencia
+    const experienciaContainer = document.querySelector('.experience-item');
+    if (experienciaContainer && cvData.experiencia[0]) {
+        experienciaContainer.innerHTML = `
+            <h3>${cvData.experiencia[0].puesto}</h3>
+            <p class="company">${cvData.experiencia[0].periodo}</p>
+            <p class="location"><i class="fas fa-map-marker-alt"></i> ${cvData.experiencia[0].ubicacion}</p>
+            <ul>
+                ${cvData.experiencia[0].tareas.map(tarea => `<li>${tarea}</li>`).join('')}
+            </ul>
+        `;
     }
     
-    const ubicacionElement = document.querySelector('#ubicacion .contact-value');
-    if (ubicacionElement) ubicacionElement.textContent = cvData.ubicacion;
+    // Educación
+    const educationContainer = document.querySelector('.right-column .section:nth-child(2)');
+    if (educationContainer) {
+        educationContainer.innerHTML = `
+            <h2><i class="fas fa-graduation-cap"></i> Educación</h2>
+            ${cvData.educacion.map(edu => `
+                <div class="education-item">
+                    <h3>${edu.titulo}</h3>
+                    <p class="date">${edu.fecha}</p>
+                    <p>${edu.institucion}</p>
+                    ${edu.subtitulo ? `<p class="subtitle">${edu.subtitulo}</p>` : ''}
+                </div>
+            `).join('')}
+        `;
+    }
+    
+    // Proyectos
+    const proyectosContainer = document.querySelector('.right-column .section:nth-child(3)');
+    if (proyectosContainer) {
+        proyectosContainer.innerHTML = `
+            <h2><i class="fas fa-project-diagram"></i> Proyectos Destacados</h2>
+            ${cvData.proyectos.map(proy => `
+                <div class="project-item">
+                    <h3>${proy.titulo}</h3>
+                    <p>${proy.descripcion}</p>
+                    <div class="project-tech">
+                        ${proy.tecnologias.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('')}
+        `;
+    }
+    
+    // Videos
+    const moscardonContainer = document.querySelector('.video-showcase .video-section:first-child .video-info');
+    if (moscardonContainer) {
+        moscardonContainer.innerHTML = `
+            <h3>${cvData.videos.moscardon.titulo}</h3>
+            <p class="video-badge">${cvData.videos.moscardon.badge}</p>
+            <p>${cvData.videos.moscardon.descripcion}</p>
+            <div class="video-tags">
+                ${cvData.videos.moscardon.tags.map(tag => `<span class="video-tag">${tag}</span>`).join('')}
+            </div>
+        `;
+    }
+    
+    const toyotaContainer = document.querySelector('.video-showcase .video-section:last-child .video-info');
+    if (toyotaContainer) {
+        toyotaContainer.innerHTML = `
+            <h3>${cvData.videos.toyota.titulo}</h3>
+            <p class="video-badge toyota-badge">${cvData.videos.toyota.badge}</p>
+            <p class="video-company"><i class="fas fa-building"></i> ${cvData.videos.toyota.empresa}</p>
+            <p>${cvData.videos.toyota.descripcion}</p>
+            <div class="video-tags">
+                ${cvData.videos.toyota.tags.map(tag => `<span class="video-tag">${tag}</span>`).join('')}
+            </div>
+        `;
+    }
 }
 
-// Cargar habilidades (EN INGLÉS como vos querés)
-function cargarHabilidades() {
-    const container = document.getElementById('skills-container');
-    if (container) {
-        container.innerHTML = '';
-        cvData.habilidades.forEach(habilidad => {
-            const tag = document.createElement('div');
-            tag.className = 'skill-tag';
-            tag.textContent = habilidad;  // ← Se muestra en inglés
-            tag.addEventListener('click', () => mostrarAlerta(`Skill: ${habilidad}`, 'info'));
-            container.appendChild(tag);
-        });
-    }
-}
-
 // ============================================
-// 3. FUNCIONES DE INTERACCIÓN
+// 3. FUNCIONES DE INTERACCIÓN (sin cambios)
 // ============================================
 
-// Pantalla de carga con video
 function initIntroVideo() {
     const loadingScreen = document.getElementById('loading-screen');
     const introVideo = document.getElementById('intro-video');
@@ -98,7 +259,6 @@ function initIntroVideo() {
     setTimeout(hideIntro, 10000);
 }
 
-// Obtener datos de GitHub
 async function obtenerGitHubStats() {
     const username = cvData.github;
     const repoCountElement = document.getElementById('repo-count');
@@ -141,7 +301,6 @@ async function obtenerGitHubStats() {
     }
 }
 
-// Contador de visitas
 function actualizarContadorVisitas() {
     let visitas = localStorage.getItem('visitas_cv');
     if (visitas === null) visitas = 1;
@@ -154,7 +313,6 @@ function actualizarContadorVisitas() {
     }
 }
 
-// Alertas personalizadas
 function mostrarAlerta(mensaje, tipo = 'info') {
     const alerta = document.createElement('div');
     alerta.className = 'custom-alert';
@@ -176,7 +334,6 @@ function mostrarAlerta(mensaje, tipo = 'info') {
     setTimeout(() => alerta.remove(), 3500);
 }
 
-// Tema oscuro/claro
 function initThemeToggle() {
     const btn = document.getElementById('theme-toggle');
     if (!btn) return;
@@ -202,7 +359,6 @@ function initThemeToggle() {
     });
 }
 
-// Descargar PDF
 function initPDFDownload() {
     const btn = document.getElementById('download-pdf');
     const container = document.getElementById('cv-container');
@@ -233,7 +389,6 @@ function initPDFDownload() {
     });
 }
 
-// Formulario de contacto
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
@@ -271,7 +426,6 @@ function initContactForm() {
     });
 }
 
-// Efecto de escritura
 function efectoEscritura() {
     const titulo = document.querySelector('.titulo');
     if (titulo && titulo.textContent) {
@@ -289,7 +443,6 @@ function efectoEscritura() {
     }
 }
 
-// Tooltips para redes sociales
 function initSocialTooltips() {
     const socialLinks = document.querySelectorAll('.social-link');
     socialLinks.forEach(link => {
@@ -302,19 +455,6 @@ function initSocialTooltips() {
     });
 }
 
-// Animación de barras de progreso
-function initProgressBars() {
-    const progressBars = document.querySelectorAll('.progress');
-    progressBars.forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0';
-        setTimeout(() => {
-            bar.style.width = width;
-        }, 500);
-    });
-}
-
-// Efectos interactivos
 function initInteractiveEffects() {
     const experienceItems = document.querySelectorAll('.experience-item');
     experienceItems.forEach(item => {
@@ -338,7 +478,6 @@ function initInteractiveEffects() {
     }
 }
 
-// Lazy loading para videos
 function initLazyVideos() {
     const videoPlaceholders = document.querySelectorAll('.video-placeholder');
     if (videoPlaceholders.length === 0) return;
@@ -364,9 +503,8 @@ function initLazyVideos() {
             iframe.style.top = "0";
             iframe.style.left = "0";
 
-            // Agregar manejo de errores
             iframe.onerror = function() {
-                placeholder.innerHTML = '<div style="color: white; text-align: center; padding: 20px;">Error al cargar el video. Verifica que el enlace sea correcto.</div>';
+                placeholder.innerHTML = '<div style="color: white; text-align: center; padding: 20px;">Error al cargar el video.</div>';
             };
 
             placeholder.innerHTML = '';
@@ -392,49 +530,40 @@ function initLazyVideos() {
             placeholder.addEventListener('click', () => loadYouTubePlayer(placeholder));
         });
     } else {
-        // Fallback para navegadores antiguos: cargar al clic (si no se puede observar)
         videoPlaceholders.forEach(placeholder => {
             placeholder.addEventListener('click', () => loadYouTubePlayer(placeholder));
         });
     }
 }
 
-
 // ============================================
 // 4. INICIALIZACIÓN
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Cargar datos del CV
-    cargarDatosCV();
+    // 1. Cargar TODO el contenido desde cvData
+    cargarTodoElContenido();
     
-    // 2. Cargar habilidades (EN INGLÉS)
-    cargarHabilidades();
-    
-    // 3. Contador y GitHub
+    // 2. Contador y GitHub
     actualizarContadorVisitas();
     obtenerGitHubStats();
     
-    // 4. Pantalla de carga
+    // 3. Pantalla de carga
     initIntroVideo();
     
-    // 5. Interacciones
+    // 4. Interacciones
     initThemeToggle();
     initPDFDownload();
     initContactForm();
     efectoEscritura();
     initSocialTooltips();
-    initProgressBars();
     initInteractiveEffects();
     initLazyVideos();
     
-    // 6. Mensaje de bienvenida
+    // 5. Mensaje de bienvenida
     setTimeout(() => {
         mostrarAlerta(`¡Bienvenido al CV de ${cvData.nombre}!`, 'success');
     }, 1200);
 });
 
-// ============================================
-// 5. EXPORTAR PARA USO GLOBAL
-// ============================================
 window.cvData = cvData;
 window.mostrarAlerta = mostrarAlerta;

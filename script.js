@@ -55,7 +55,7 @@ function cargarHabilidades() {
     if (container) {
         container.innerHTML = '';
         cvData.habilidades.forEach(habilidad => {
-            const tag = document.createElement('div');
+            const tag = document.createElement('li');
             tag.className = 'skill-tag';
             tag.textContent = habilidad;  // ← Se muestra en inglés
             tag.addEventListener('click', () => mostrarAlerta(`Skill: ${habilidad}`, 'info'));

@@ -52,7 +52,7 @@ html {
     --bg-dark: #272A12;
     --bg-card: #ECE5D0; /* contraste mejorado con texto oscuro */
     --text-primary: #1A1C0F; /* texto más fuerte en fondo claro */
-    --text-secondary: #4A512A;
+    --text-secondary: #2C3318;
     --border-light: #C3BCA5;
     --shadow: 0 1rem 3rem rgba(0,0,0,0.14);
     --transition: all 0.3s ease;
@@ -62,7 +62,7 @@ body.dark-theme {
     --bg-dark: #12120A;
     --bg-card: #222415;
     --text-primary: #F0E8C0;
-    --text-secondary: #B5BF8E;
+    --text-secondary: #2C3318;
     --border-light: #4B532A;
     --shadow: 0 1rem 3rem rgba(0,0,0,0.45);
 }

@@ -12,38 +12,58 @@ const cvData = {
 
 // ========== FUNCIÓN PARA LA PANTALLA DE CARGA CON VIDEO ==========
 function initIntroVideo() {
+    console.log("Iniciando pantalla de carga");
+    
     const loadingScreen = document.getElementById('loading-screen');
     const introVideo = document.getElementById('intro-video');
     const skipBtn = document.getElementById('skip-intro');
     
-    if (!loadingScreen) return;
+    if (!loadingScreen) {
+        console.log("ERROR: No se encontró #loading-screen");
+        return;
+    }
     
     function hideIntro() {
-        loadingScreen.classList.add('hide');
+        console.log("Ocultando pantalla de carga");
+        loadingScreen.style.opacity = '0';
+        loadingScreen.style.visibility = 'hidden';
+        loadingScreen.style.pointerEvents = 'none';
         setTimeout(() => {
             loadingScreen.style.display = 'none';
-            if (introVideo) introVideo.pause();
+            if (introVideo) {
+                introVideo.pause();
+            }
         }, 500);
     }
     
+    // Botón saltar - VERSIÓN CORREGIDA
     if (skipBtn) {
-        skipBtn.addEventListener('click', hideIntro);
+        console.log("Botón skip encontrado, asignando evento");
+        skipBtn.onclick = function(e) {
+            e.preventDefault();
+            console.log("Botón skip clickeado");
+            hideIntro();
+        };
+    } else {
+        console.log("ERROR: No se encontró #skip-intro");
     }
     
+    // Cuando termina el video
     if (introVideo) {
-        introVideo.addEventListener('ended', hideIntro);
+        console.log("Video encontrado");
+        introVideo.onended = hideIntro;
         
-        // Intentar reproducir el video
-        introVideo.play().catch(e => console.log('Autoplay bloqueado por el navegador'));
-        
-        // Activar sonido después del primer click del usuario
-        document.body.addEventListener('click', () => {
-            introVideo.muted = false;
-        }, { once: true });
+        // Intentar reproducir
+        introVideo.play().catch(e => console.log('Autoplay bloqueado:', e));
+    } else {
+        console.log("ERROR: No se encontró #intro-video");
     }
     
-    // Timeout de seguridad: si el video no termina en 10 segundos, se cierra igual
-    setTimeout(hideIntro, 10000);
+    // Timeout de seguridad: 8 segundos máximo
+    setTimeout(() => {
+        console.log("Timeout de seguridad activado");
+        hideIntro();
+    }, 8000);
 }
 
 // ========== FUNCIÓN PARA OBTENER DATOS DE GITHUB ==========
@@ -360,10 +380,26 @@ function initLazyVideos() {
     }
 }
 
+// ========== FUNCIÓN DE RESPALDO: Forzar cierre de pantalla de carga ==========
+function fuerzaCierrePantallaCarga() {
+    setTimeout(function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen && loadingScreen.style.display !== 'none') {
+            console.log("Forzando cierre de pantalla de carga");
+            loadingScreen.style.display = 'none';
+        }
+    }, 5000);
+}
+
 // ========== INICIALIZACIÓN ==========
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM cargado correctamente");
+    
     // Pantalla de carga con video
     initIntroVideo();
+    
+    // Respaldo: forzar cierre después de 5 segundos
+    fuerzaCierrePantallaCarga();
     
     // Cargar datos
     cargarHabilidades();

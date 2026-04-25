@@ -4,22 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flavio Sistro - CV Web</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="libs/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-
-    <!-- PANTALLA DE CARGA CON VIDEO -->
-    <div id="loading-screen" class="loading-screen">
-        <video id="intro-video" autoplay muted playsinline>
-            <source src="web.mp4" type="video/mp4">
-            Tu navegador no soporta video.
-        </video>
-        <button id="skip-intro" class="skip-btn">Saltar intro</button>
-    </div>
-
-    <!-- BOTONES FLOTANTES -->
     <div class="theme-toggle-container">
         <button id="theme-toggle" class="theme-btn">
             <i class="fas fa-moon"></i>
@@ -31,22 +21,22 @@
         </button>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL DEL CV -->
     <div class="container" id="cv-container">
-        
-        <!-- HEADER -->
+        <!-- Header con foto y título -->
         <header class="header">
             <div class="profile-image">
-                <img src="DSC02494.jpg" alt="Flavio Sistro" class="profile-img">
+                <div class="profile-placeholder">
+                    <i class="fas fa-user-circle"></i>
+                </div>
             </div>
-            <h1 id="nombre"></h1>
-            <p class="titulo"></p>
+            <h1 id="nombre">Flavio Sistro</h1>
+            <p class="titulo">Desarrollador en Formación | Narrativa Audiovisual</p>
             <div class="contact-info">
-                <span id="telefono"><i class="fas fa-phone"></i> <span class="contact-value"></span></span>
-                <span id="email"><i class="fas fa-envelope"></i> <a href="mailto:fsistro@gmail.com" class="contact-value"></a></span>
-                <span id="linkedin"><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/flaverttpuntomov/" target="_blank" rel="noopener noreferrer" class="contact-value"></a></span>
-                <span id="github"><i class="fab fa-github"></i> <a href="https://github.com/FlavertT/" target="_blank" rel="noopener noreferrer" class="contact-value"></a></span>
-                <span id="ubicacion"><i class="fas fa-map-marker-alt"></i> <span class="contact-value"></span></span>
+                <span><i class="fas fa-phone"></i> 0221 6122976</span>
+                <span><i class="fas fa-envelope"></i> fsistro@gmail.com</span>
+                <span><i class="fab fa-linkedin"></i> flavertptuntomov</span>
+                <span><i class="fab fa-github"></i> FlavertT</span>
+                <span><i class="fas fa-map-marker-alt"></i> La Plata, Argentina</span>
             </div>
         </header>
 
@@ -61,19 +51,25 @@
 
                 <section class="section">
                     <h2><i class="fas fa-code"></i> Aptitudes Principales</h2>
-                    <div class="skills" id="skills-container"></div>
+                    <div class="skills" id="skills-container">
+                        <!-- Las habilidades se cargarán con JavaScript -->
+                    </div>
                 </section>
 
                 <section class="section">
                     <h2><i class="fas fa-language"></i> Idiomas</h2>
                     <div class="language-item">
                         <span>Español</span>
-                        <progress class="language-progress" value="100" max="100">100%</progress>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 100%"></div>
+                        </div>
                         <span>Nativo</span>
                     </div>
                     <div class="language-item">
                         <span>Inglés</span>
-                        <progress class="language-progress" value="75" max="100">75%</progress>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%"></div>
+                        </div>
                         <span>Intermedio</span>
                     </div>
                 </section>
@@ -83,9 +79,6 @@
                     <div class="certification-item">
                         <p><strong>"El Vuelo del Moscardón"</strong></p>
                         <p>Película de interés Provincial</p>
-                        <a href="https://www.youtube.com/watch?v=eY4jXLyNNV0" target="_blank" rel="noopener noreferrer" class="watch-link">
-                            <i class="fab fa-youtube"></i> Ver tráiler
-                        </a>
                     </div>
                 </section>
 
@@ -104,7 +97,7 @@
                             <i class="fas fa-code"></i>
                             <span>Lenguajes principales: <strong id="languages">Cargando...</strong></span>
                         </div>
-                        <a href="https://github.com/FlavertT" target="_blank" rel="noopener noreferrer" class="github-link">
+                        <a href="https://github.com/FlavertT" target="_blank" class="github-link">
                             <i class="fab fa-github"></i> Ver perfil en GitHub
                         </a>
                     </div>
@@ -152,6 +145,7 @@
                             <span class="tech-tag">SQL</span>
                             <span class="tech-tag">Flask</span>
                         </div>
+                        <a href="#" class="project-link">Ver proyecto <i class="fas fa-external-link-alt"></i></a>
                     </div>
                     <div class="project-item">
                         <h3>Portfolio Interactivo</h3>
@@ -161,71 +155,10 @@
                             <span class="tech-tag">CSS3</span>
                             <span class="tech-tag">JavaScript</span>
                         </div>
+                        <a href="#" class="project-link">Ver proyecto <i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </section>
             </div>
-        </div>
-
-        <!-- Sección de Videos -->
-        <div class="video-showcase">
-            <!-- Video 1: El Vuelo del Moscardón (con lazy loading) -->
-            <section class="section video-section">
-                <h2><i class="fas fa-film"></i> Producción Cinematográfica</h2>
-                <div class="video-card">
-                    <div class="video-container" id="video-moscardon-container">
-                        <div class="video-placeholder" data-video-id="eY4jXLyNNV0">
-                            <div class="video-preview">
-                                <img src="https://img.youtube.com/vi/eY4jXLyNNV0/maxresdefault.jpg" 
-                                     alt="Preview El Vuelo del Moscardón" 
-                                     loading="lazy">
-                                <div class="play-button">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                                <div class="video-loader" style="display: none;">
-                                    <i class="fas fa-spinner fa-spin"></i> Cargando...
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h3>"El Vuelo del Moscardón" - Tráiler Oficial</h3>
-                        <p class="video-badge">🏆 Película de interés Provincial</p>
-                        <p>Una producción audiovisual que captura la esencia y las tradiciones de nuestra provincia. Reconocida por su valor cultural y artístico.</p>
-                        <div class="video-tags">
-                            <span class="video-tag">Largometraje</span>
-                            <span class="video-tag">Documental</span>
-                            <span class="video-tag">Dirección</span>
-                            <span class="video-tag">2025</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Video 2: Trabajo en Toyota -->
-            <section class="section video-section">
-                <h2><i class="fas fa-industry"></i> Proyecto Industrial</h2>
-                <div class="video-card toyota-card">
-                    <div class="video-container">
-                        <video controls poster="toyuta.png">
-                            <source src="TOYOTA1.mp4" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h3>Planta Automatizada Toyota</h3>
-                        <p class="video-badge toyota-badge">📅 Febrero 2026</p>
-                        <p class="video-company"><i class="fas fa-building"></i> Toyota Argentina</p>
-                        <p>Trabajo audiovisual realizado en la planta automatizada de Toyota, documentando procesos de automatización industrial, líneas de ensamblaje y control de calidad.</p>
-                        <div class="video-tags">
-                            <span class="video-tag">Industria 4.0</span>
-                            <span class="video-tag">Automatización</span>
-                            <span class="video-tag">Toyota</span>
-                            <span class="video-tag">Producción Industrial</span>
-                            <span class="video-tag">Febrero 2026</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
         </div>
 
         <!-- Formulario de contacto -->
@@ -250,15 +183,15 @@
             </form>
         </section>
 
-        <!-- Footer -->
+        <!-- Footer con redes sociales -->
         <footer class="footer">
             <div class="social-links">
-                <a href="https://github.com/FlavertT" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/flaverttpuntomov/" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/FlavertT" target="_blank" class="social-link" data-social="github"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link" data-social="linkedin"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="social-link" data-social="twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link" data-social="instagram"><i class="fab fa-instagram"></i></a>
             </div>
-            <p class="footer-text">&copy; 2026 Flavio Sistro - Todos los derechos reservados</p>
+            <p class="footer-text">&copy; 2024 Flavio Sistro - Todos los derechos reservados</p>
         </footer>
     </div>
 

@@ -110,7 +110,7 @@ async function obtenerGitHubStats() {
 }
 
 // Contador de visitas
-function actualizarContadorVisitas() {
+function countvisit() {
     let visitas = localStorage.getItem('visitas_cv');
     if (visitas === null) visitas = 1;
     else visitas = parseInt(visitas) + 1;
@@ -123,7 +123,7 @@ function actualizarContadorVisitas() {
 }
 
 // Cargar habilidades
-function cargarHabilidades() {
+function chargeskills() {
     const container = document.getElementById('skills-container');
     if (container) {
         container.innerHTML = '';

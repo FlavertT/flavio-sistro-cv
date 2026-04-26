@@ -186,35 +186,26 @@ function initThemeToggle() {
 }
 
 // Descargar PDF
-function initPDFDownload() {
-    const btn = document.getElementById('download-pdf');
-    const container = document.getElementById('cv-container');
-    
-    if (!btn) return;
-    
-    btn.addEventListener('click', async () => {
-        mostrarAlerta('Generando PDF, por favor espera...', 'info');
-        
-        const themeContainer = document.querySelector('.theme-toggle-container');
-        if (themeContainer) themeContainer.style.display = 'none';
-        
-        try {
-            await html2pdf().set({
-                margin: 0.5,
-                filename: `CV_Flavio_Sistro.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            }).from(container).save();
-            mostrarAlerta('PDF generado exitosamente!', 'success');
-        } catch (error) {
-            console.error('Error:', error);
-            mostrarAlerta('Error al generar el PDF', 'error');
-        } finally {
-            if (themeContainer) themeContainer.style.display = 'flex';
-        }
-    });
+function descargarPDF() {
+  // cargar la librería solo si no está cargada
+  if (typeof html2pdf === "undefined") {
+    const script = document.createElement("script");
+    script.src = "html2pdf.bundle.min.js"; // ruta local
+    script.onload = () => generarPDF();
+    document.body.appendChild(script);
+  } else {
+    generarPDF();
+  }
 }
+
+function generarPDF() {
+  const element = document.getElementById("cv");
+  html2pdf().from(element).save();
+}
+
+// asignar la función al botón
+document.getElementById("btnDescargarPDF").addEventListener("click", descargarPDF);
+
 
 // Formulario de contacto
 function initContactForm() {

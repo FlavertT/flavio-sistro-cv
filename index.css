@@ -12,6 +12,10 @@
     --bg-card: #F5F0E4;
     --text-primary: #2A2C1A;
     --text-secondary: #5A5C3A;
+    --btn-bg: #41431B;           
+    --btn-text: #FFFFFF;         
+    --btn-bg-hover: #2A2C1A;     
+    --btn-text-hover: #FFFFFF;
     --border-light: #C9C4AE;
     --accent-color: #41431B;
     --accent-secondary: #AEB784;
@@ -49,8 +53,8 @@ body {
 }
 
 .theme-btn, .download-btn {
-    background: var(--bg-card);
-    color: var(--color-primary);
+    background: var(--btn-bg);
+    color: var(--btn-text);
     border: 1px solid var(--color-secondary);
     padding: 10px 20px;
     border-radius: 8px;
@@ -65,9 +69,8 @@ body {
 }
 
 .theme-btn:hover, .download-btn:hover {
-    transform: translateY(-2px);
-    background: var(--color-secondary);
-    color: var(--color-primary);
+    background: var(--btn-bg-hover);
+    color: var(--btn-text-hover);
     border-color: var(--color-primary);
 }
 

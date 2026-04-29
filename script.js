@@ -10,6 +10,16 @@ const cvData = {
     habilidades: ["Programación en C", "SQL", "Python", "HTML5", "CSS3", "JavaScript"]
 };
 
+// Rellenar HTML dinámicamente
+document.getElementById("cv-name").textContent = cvData.nombre;
+document.getElementById("cv-title").textContent = cvData.titulo;
+document.getElementById("cv-phone").textContent = cvData.telefono;
+document.getElementById("cv-email").textContent = cvData.email;
+document.getElementById("cv-linkedin").textContent = cvData.linkedin;
+document.getElementById("cv-github").textContent = cvData.github;
+document.getElementById("cv-location").textContent = cvData.ubicacion;
+
+
 // ========== FUNCIÓN PARA LA PANTALLA DE CARGA CON VIDEO ==========
 function initIntroVideo() {
     console.log("Iniciando pantalla de carga");

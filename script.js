@@ -1,3 +1,4 @@
+
 // Datos del CV
 const cvData = {
     nombre: "Flavio Sistro",
@@ -190,7 +191,7 @@ function descargarPDF() {
   // cargar la librería solo si no está cargada
   if (typeof html2pdf === "undefined") {
     const script = document.createElement("script");
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
+    script.src = "html2pdf.bunbdle.min.js";
     script.onload = () => generarPDF();
     document.body.appendChild(script);
   } else {
@@ -199,8 +200,13 @@ function descargarPDF() {
 }
 
 function generarPDF() {
-  const element = document.getElementById("cv");
-  html2pdf().from(element).save();
+    const element = document.getElementById("cv-container");
+
+    console.log(element);
+
+    html2pdf()
+        .from(element)
+        .save("Flavio-Sistro-CV.pdf");
 }
 
 // Formulario de contacto
@@ -381,7 +387,13 @@ function fuerzaCierrePantallaCarga() {
 // ========== INICIALIZACIÓN ==========
 document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM cargado correctamente");
-    
+    function initPDFDownload() {
+    const btn = document.getElementById('download-pdf');
+
+    if (!btn) return;
+
+    btn.addEventListener('click', descargarPDF);
+}
     // Pantalla de carga con video
     initIntroVideo();
     

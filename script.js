@@ -58,7 +58,6 @@ function initIntroVideo() {
         console.log("ERROR: No se encontró #skip-intro");
     }
     
-    // Cuando termina el video
     if (introVideo) {
         console.log("Video encontrado");
         introVideo.onended = hideIntro;

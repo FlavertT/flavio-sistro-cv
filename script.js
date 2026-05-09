@@ -120,10 +120,10 @@ async function obtenerGitHubStats() {
 }
 
 // Contador de visitas
-function actualizarContadorVisitas() {
-    let visitas = localStorage.getItem('visitas_cv');
-    if (visitas === null) visitas = 1;
-    else visitas = parseInt(visitas) + 1;
+function countvisit() {
+    let visit = localStorage.getItem('visitas_cv');
+    if (visit === null) visitas = 1;
+    else visit = parseInt(visitas) + 1;
     localStorage.setItem('visitas_cv', visitas);
     
     const footerText = document.querySelector('.footer-text');
@@ -133,7 +133,7 @@ function actualizarContadorVisitas() {
 }
 
 // Cargar habilidades
-function cargarHabilidades() {
+function chargeskills() {
     const container = document.getElementById('skills-container');
     if (container) {
         container.innerHTML = '';
@@ -149,14 +149,14 @@ function cargarHabilidades() {
 
 // Alertas personalizadas
 function mostrarAlerta(mensaje, tipo = 'info') {
-    const alerta = document.createElement('div');
+    const alert = document.createElement('div');
     alerta.className = 'custom-alert';
     
     let icono = 'fa-info-circle';
     if (tipo === 'success') icono = 'fa-check-circle';
     if (tipo === 'error') icono = 'fa-exclamation-circle';
     
-    alerta.innerHTML = `
+    alert.innerHTML = `
         <div class="alert-content">
             <i class="fas ${icono}"></i>
             <p>${mensaje}</p>
@@ -265,7 +265,7 @@ function initContactForm() {
 }
 
 // Efecto de escritura
-function efectoEscritura() {
+function writingEffect() {
     const titulo = document.querySelector('.titulo');
     if (titulo && titulo.textContent) {
         const texto = titulo.textContent;
@@ -391,7 +391,7 @@ function initLazyVideos() {
 }
 
 // ========== FUNCIÓN DE RESPALDO: Forzar cierre de pantalla de carga ==========
-function fuerzaCierrePantallaCarga() {
+function forceCloseScreen() {
     setTimeout(function() {
         const loadingScreen = document.getElementById('loading-screen');
         if (loadingScreen && loadingScreen.style.display !== 'none') {

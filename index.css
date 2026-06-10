@@ -7,7 +7,7 @@
 :root {
     --color-primary: #41431B;
     --color-secondary: #AEB784;
-    --color-light: #E3DBBB;
+    --color-light: #C9BE8F;
     --bg-dark: #2A2C1A;
     --bg-card: #F5F0E4;
     --text-primary: #2A2C1A;
@@ -226,7 +226,7 @@ body {
 }
 
 .date, .company, .location {
-    color: var(--color-secondary);
+    color: color: #6B7A4D;
     font-size: 0.85rem;
     margin-bottom: 0.5rem;
 }

@@ -352,8 +352,8 @@ body {
 }
 
 .tech-tag {
-    background: var(--color-secondary);
-    color: var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-light);
     padding: 0.25rem 0.75rem;
     border-radius: 1.25rem;
     font-size: 0.75rem;

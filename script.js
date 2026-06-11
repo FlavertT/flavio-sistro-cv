@@ -200,9 +200,15 @@ function initPDFDownload() {
     const btn = document.getElementById('download-pdf');
     const container = document.getElementById('cv-container');
     
-    if (!btn) return;
+    if (!btn || !container) return;
     
     btn.addEventListener('click', async () => {
+        if (typeof html2pdf !== 'function') {
+            showAlert('No se pudo cargar el generador de PDF', 'error');
+            return;
+        }
+
+        btn.disabled = true;
         showAlert('Generando PDF, por favor espera...', 'info');
         
         const themeContainer = document.querySelector('.theme-toggle-container');
@@ -213,7 +219,12 @@ function initPDFDownload() {
                 margin: 0.5,
                 filename: `CV_Flavio_Sistro.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: false,
+                    ignoreElements: element => element.matches('iframe, video, img')
+                },
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             }).from(container).save();
             showAlert('PDF generado exitosamente!', 'success');
@@ -222,6 +233,7 @@ function initPDFDownload() {
             showAlert('Error al generar el PDF', 'error');
         } finally {
             if (themeContainer) themeContainer.style.display = 'flex';
+            btn.disabled = false;
         }
     });
 }

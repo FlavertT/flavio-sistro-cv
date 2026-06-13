@@ -12,7 +12,7 @@
 
     <!-- PANTALLA DE CARGA CON VIDEO - VERSIÓN CORREGIDA -->
     <div id="loading-screen" class="loading-screen">
-        <video id="intro-video" autoplay muted playsinline>
+        <video id="intro-video" class="loading-video" autoplay muted playsinline>
             <source src="web.mp4" type="video/mp4">
             Tu navegador no soporta video.
         </video>
@@ -37,16 +37,16 @@
         <!-- HEADER -->
         <header class="header">
             <div class="profile-image">
-                <img src="img/profile.jpg" alt="Flavio Sistro" loading="lazy">
+                <img class="profile-photo" src="img/profile.jpg" alt="Flavio Sistro" loading="lazy">
             </div>
-            <h1 id="cv-name"></h1>
-            <p id="cv-title"></p>
+            <h1 id="cv-name" class="header-title"></h1>
+            <p id="cv-title" class="titulo"></p>
             <div class="contact-info">
-                <span><i class="fas fa-phone"></i> <span id="cv-phone"></span></span>
-                <span><i class="fas fa-envelope"></i> <span id="cv-email"></span></span>
-                <span><i class="fab fa-linkedin"></i> <a id="cv-linkedin" target="_blank"></a></span>
-                <span><i class="fab fa-github"></i> <a id="cv-github" target="_blank"></a></span>
-                <span><i class="fas fa-map-marker-alt"></i> <span id="cv-location"></span></span>
+                <span class="contact-info-item"><i class="fas fa-phone contact-info-icon"></i> <span id="cv-phone"></span></span>
+                <span class="contact-info-item"><i class="fas fa-envelope contact-info-icon"></i> <span id="cv-email"></span></span>
+                <span class="contact-info-item"><i class="fab fa-linkedin contact-info-icon"></i> <a id="cv-linkedin" target="_blank"></a></span>
+                <span class="contact-info-item"><i class="fab fa-github contact-info-icon"></i> <a id="cv-github" target="_blank"></a></span>
+                <span class="contact-info-item"><i class="fas fa-map-marker-alt contact-info-icon"></i> <span id="cv-location"></span></span>
     </div>
 
         </header>
@@ -56,33 +56,33 @@
             <!-- Columna izquierda -->
             <div class="left-column">
                 <section class="section">
-                    <h2><i class="fas fa-user"></i> Sobre Mí</h2>
+                    <h2 class="section-title"><i class="fas fa-user section-title-icon"></i> Sobre Mí</h2>
                     <p>Desarrollador en formación con una sólida base en programación en C, Python y SQL, actualmente cursando la tecnicatura en la UTN. Me encuentro en la búsqueda de mi primera oportunidad profesional donde pueda aplicar mis habilidades técnicas y mi pasión por crear soluciones digitales.</p>
                 </section>
 
                 <section class="section">
-                    <h2><i class="fas fa-code"></i> Aptitudes Principales</h2>
+                    <h2 class="section-title"><i class="fas fa-code section-title-icon"></i> Aptitudes Principales</h2>
                     <div class="skills" id="skills-container"></div>
                 </section>
 
                 <section class="section">
-                 <h2><i class="fas fa-language"></i> Idiomas</h2>
+                 <h2 class="section-title"><i class="fas fa-language section-title-icon"></i> Idiomas</h2>
 
               <div class="language-item">
-                 <span>Español</span>
+                 <span class="language-label">Español</span>
                 <progress class="language-item__progress" value="100" max="100"></progress>
-                <span>Nativo</span>
+                <span class="language-label">Nativo</span>
             </div>
 
              <div class="language-item">
-                <span>Inglés</span>
+                <span class="language-label">Inglés</span>
                  <progress class="language-item__progress" value="75" max="100"></progress>
-                 <span>Intermedio</span>
+                 <span class="language-label">Intermedio</span>
              </div>
                 </section>
 
                 <section class="section">
-                    <h2><i class="fas fa-certificate"></i> Certificaciones</h2>
+                    <h2 class="section-title"><i class="fas fa-certificate section-title-icon"></i> Certificaciones</h2>
                     <div class="certification-item">
                         <p><strong>"El Vuelo del Moscardón"</strong></p>
                         <p>Película de interés Provincial</p>
@@ -93,19 +93,19 @@
                 </section>
 
                 <section class="section">
-                    <h2><i class="fab fa-github"></i> GitHub Stats</h2>
+                    <h2 class="section-title"><i class="fab fa-github section-title-icon"></i> GitHub Stats</h2>
                     <div class="github-stats">
                         <div class="github-stat-item">
-                            <i class="fas fa-code-branch"></i>
-                            <span>Repositorios: <strong id="repo-count">Cargando...</strong></span>
+                            <i class="fas fa-code-branch github-stat-icon"></i>
+                            <span>Repositorios: <strong id="repo-count" class="github-stat-value">Cargando...</strong></span>
                         </div>
                         <div class="github-stat-item">
-                            <i class="fas fa-star"></i>
-                            <span>Stars: <strong id="stars-count">Cargando...</strong></span>
+                            <i class="fas fa-star github-stat-icon"></i>
+                            <span>Stars: <strong id="stars-count" class="github-stat-value">Cargando...</strong></span>
                         </div>
                         <div class="github-stat-item">
-                            <i class="fas fa-code"></i>
-                            <span>Lenguajes principales: <strong id="languages">Cargando...</strong></span>
+                            <i class="fas fa-code github-stat-icon"></i>
+                            <span>Lenguajes principales: <strong id="languages" class="github-stat-value">Cargando...</strong></span>
                         </div>
                         <a href="https://github.com/FlavertT" target="_blank" class="github-link">
                             <i class="fab fa-github"></i> Ver perfil en GitHub
@@ -117,28 +117,28 @@
             <!-- Columna derecha -->
             <div class="right-column">
                 <section class="section">
-                    <h2><i class="fas fa-briefcase"></i> Experiencia</h2>
+                    <h2 class="section-title"><i class="fas fa-briefcase section-title-icon"></i> Experiencia</h2>
                     <div class="experience-item">
-                        <h3>Camarógrafo - Flavertt</h3>
+                        <h3 class="item-title">Camarógrafo - Flavertt</h3>
                         <p class="company">marzo de 2018 - Presente (8 años 1 mes)</p>
                         <p class="location"><i class="fas fa-map-marker-alt"></i> Provincia de Buenos Aires, Argentina</p>
-                        <ul>
-                            <li>Gestión de proyectos audiovisuales desde la preproducción hasta la entrega final</li>
-                            <li>Cumplimiento de plazos y expectativas del cliente</li>
-                            <li>Coordinación de equipos de trabajo y recursos técnicos</li>
+                        <ul class="experience-list">
+                            <li class="experience-list-item">Gestión de proyectos audiovisuales desde la preproducción hasta la entrega final</li>
+                            <li class="experience-list-item">Cumplimiento de plazos y expectativas del cliente</li>
+                            <li class="experience-list-item">Coordinación de equipos de trabajo y recursos técnicos</li>
                         </ul>
                     </div>
                 </section>
 
                 <section class="section">
-                    <h2><i class="fas fa-graduation-cap"></i> Educación</h2>
+                    <h2 class="section-title"><i class="fas fa-graduation-cap section-title-icon"></i> Educación</h2>
                     <div class="education-item">
-                        <h3>Tecnicatura en Programación</h3>
+                        <h3 class="item-title">Tecnicatura en Programación</h3>
                         <p class="date">2024 - diciembre de 2027</p>
                         <p>Universidad Tecnológica Nacional (UTN)</p>
                     </div>
                     <div class="education-item">
-                        <h3>Licenciatura en Artes Audiovisuales</h3>
+                        <h3 class="item-title">Licenciatura en Artes Audiovisuales</h3>
                         <p class="date">marzo de 2012 - octubre de 2024</p>
                         <p>Facultad de Artes</p>
                         <p class="subtitle">Comunicación y Marketing</p>
@@ -146,9 +146,9 @@
                 </section>
 
                 <section class="section">
-                    <h2><i class="fas fa-project-diagram"></i> Proyectos Destacados</h2>
+                    <h2 class="section-title"><i class="fas fa-project-diagram section-title-icon"></i> Proyectos Destacados</h2>
                     <div class="project-item">
-                        <h3>Sistema de Gestión de Proyectos</h3>
+                        <h3 class="item-title">Sistema de Gestión de Proyectos</h3>
                         <p>Desarrollo de una aplicación web para la gestión de proyectos audiovisuales, incluyendo seguimiento de tareas, calendario de producción y gestión de recursos.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Python</span>
@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div class="project-item">
-                        <h3>Portfolio Interactivo</h3>
+                        <h3 class="item-title">Portfolio Interactivo</h3>
                         <p>Creación de un portfolio personal con animaciones y diseño responsive, mostrando trabajos audiovisuales y proyectos de programación.</p>
                         <div class="project-tech">
                             <span class="tech-tag">HTML5</span>
@@ -173,10 +173,10 @@
         <div class="video-showcase">
             <!-- Video 1: El Vuelo del Moscardón -->
             <section class="section video-section">
-                <h2><i class="fas fa-film"></i> Producción Cinematográfica</h2>
+                <h2 class="section-title video-section-title"><i class="fas fa-film section-title-icon"></i> Producción Cinematográfica</h2>
                 <div class="video-card">
                     <div class="video-container">
-                        <iframe 
+                        <iframe class="video-media"
                             src="https://www.youtube-nocookie.com/embed/eY4jXLyNNV0" 
                             title="EL VUELO DEL MOSCARDÓN | Tráiler"
                             frameborder="0"
@@ -187,7 +187,7 @@
                         </iframe>
                     </div>
                     <div class="video-info">
-                        <h3>"El Vuelo del Moscardón" - Tráiler Oficial</h3>
+                        <h3 class="video-title">"El Vuelo del Moscardón" - Tráiler Oficial</h3>
                         <p class="video-badge">🏆 Película de interés Provincial</p>
                         <p>Una producción audiovisual que captura la esencia y las tradiciones de nuestra provincia. Reconocida por su valor cultural y artístico.</p>
                         <div class="video-tags">
@@ -202,16 +202,16 @@
 
             <!-- Video 2: Trabajo en Toyota -->
             <section class="section video-section">
-                <h2><i class="fas fa-industry"></i> Proyecto Industrial</h2>
+                <h2 class="section-title video-section-title"><i class="fas fa-industry section-title-icon"></i> Proyecto Industrial</h2>
                 <div class="video-card toyota-card">
                     <div class="video-container">
-                        <video controls poster="img/toyota-poster.png">
+                        <video class="video-media" controls poster="img/toyota-poster.png">
                             <source src="video/toyota.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
                     </div>
                     <div class="video-info">
-                        <h3>Planta Automatizada Toyota</h3>
+                        <h3 class="video-title">Planta Automatizada Toyota</h3>
                         <p class="video-badge toyota-badge">📅 Febrero 2026</p>
                         <p class="video-company"><i class="fas fa-building"></i> Toyota Argentina</p>
                         <p>Trabajo audiovisual realizado en la planta automatizada de Toyota, documentando procesos de automatización industrial, líneas de ensamblaje y control de calidad.</p>
@@ -229,19 +229,19 @@
 
         <!-- Formulario de contacto -->
         <section class="contact-section">
-            <h2><i class="fas fa-paper-plane"></i> Contactame</h2>
+            <h2 class="contact-section-title"><i class="fas fa-paper-plane"></i> Contactame</h2>
             <form id="contact-form" class="contact-form">
                 <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+                    <input class="form-control" type="text" id="name" name="name" placeholder="Tu nombre" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder="Tu email" required>
+                    <input class="form-control" type="email" id="email" name="email" placeholder="Tu email" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="subject" name="subject" placeholder="Asunto" required>
+                    <input class="form-control" type="text" id="subject" name="subject" placeholder="Asunto" required>
                 </div>
                 <div class="form-group">
-                    <textarea id="message" name="message" rows="4" placeholder="Tu mensaje" required></textarea>
+                    <textarea class="form-control" id="message" name="message" rows="4" placeholder="Tu mensaje" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">
                     <i class="fas fa-paper-plane"></i> Enviar mensaje

@@ -10,6 +10,16 @@ const cvData = {
     habilidades: ["Programación en C", "SQL", "Python", "HTML5", "CSS3", "JavaScript"]
 };
 
+// Rellenar HTML dinámicamente
+document.getElementById("cv-name").textContent = cvData.nombre;
+document.getElementById("cv-title").textContent = cvData.titulo;
+document.getElementById("cv-phone").textContent = cvData.telefono;
+document.getElementById("cv-email").textContent = cvData.email;
+document.getElementById("cv-linkedin").textContent = cvData.linkedin;
+document.getElementById("cv-github").textContent = cvData.github;
+document.getElementById("cv-location").textContent = cvData.ubicacion;
+
+
 // ========== FUNCIÓN PARA LA PANTALLA DE CARGA CON VIDEO ==========
 function initIntroVideo() {
     console.log("Iniciando pantalla de carga");
@@ -66,8 +76,8 @@ function initIntroVideo() {
     }, 8000);
 }
 
-// ========== FUNCIÓN PARA OBTENER DATOS DE GITHUB ==========
-async function obtenerGitHubStats() {
+// ========== FUNCTION TO FETCH GITHUB DATA ==========
+async function getGitHubStats() {
     const username = cvData.github;
     const repoCountElement = document.getElementById('repo-count');
     const starsCountElement = document.getElementById('stars-count');
@@ -110,20 +120,20 @@ async function obtenerGitHubStats() {
 }
 
 // Contador de visitas
-function actualizarContadorVisitas() {
-    let visitas = localStorage.getItem('visitas_cv');
-    if (visitas === null) visitas = 1;
-    else visitas = parseInt(visitas) + 1;
-    localStorage.setItem('visitas_cv', visitas);
+function countVisit() {
+    let visit = localStorage.getItem('visitas_cv');
+    if (visit === null) visit = 1;
+    else visit = parseInt(visit) + 1;
+    localStorage.setItem('visitas_cv', visit);
     
     const footerText = document.querySelector('.footer-text');
     if (footerText && !footerText.innerHTML.includes('Visitas:')) {
-        footerText.innerHTML += ` | Visitas: ${visitas}`;
+        footerText.innerHTML += ` | Visitas: ${visit}`;
     }
 }
 
-// Cargar habilidades
-function cargarHabilidades() {
+// Load skills
+function loadSkills() {
     const container = document.getElementById('skills-container');
     if (container) {
         container.innerHTML = '';
@@ -131,32 +141,32 @@ function cargarHabilidades() {
             const tag = document.createElement('div');
             tag.className = 'skill-tag';
             tag.textContent = habilidad;
-            tag.addEventListener('click', () => mostrarAlerta(`Habilidad: ${habilidad}`, 'info'));
+            tag.addEventListener('click', () => showAlert(`Habilidad: ${habilidad}`, 'info'));
             container.appendChild(tag);
         });
     }
 }
 
-// Alertas personalizadas
-function mostrarAlerta(mensaje, tipo = 'info') {
-    const alerta = document.createElement('div');
-    alerta.className = 'custom-alert';
-    
-    let icono = 'fa-info-circle';
-    if (tipo === 'success') icono = 'fa-check-circle';
-    if (tipo === 'error') icono = 'fa-exclamation-circle';
-    
-    alerta.innerHTML = `
+// Custom alerts
+function showAlert(message, type = 'info') {
+    const alert = document.createElement('div');
+    alert.className = 'custom-alert';
+
+    let icon = 'fa-info-circle';
+    if (type === 'success') icon = 'fa-check-circle';
+    if (type === 'error') icon = 'fa-exclamation-circle';
+
+    alert.innerHTML = `
         <div class="alert-content">
-            <i class="fas ${icono}"></i>
-            <p>${mensaje}</p>
+            <i class="fas ${icon}"></i>
+            <p>${message}</p>
             <button class="alert-close"><i class="fas fa-times"></i></button>
         </div>
     `;
-    document.body.appendChild(alerta);
-    const closeBtn = alerta.querySelector('.alert-close');
-    closeBtn.addEventListener('click', () => alerta.remove());
-    setTimeout(() => alerta.remove(), 3500);
+    document.body.appendChild(alert);
+    const closeBtn = alert.querySelector('.alert-close');
+    if (closeBtn) closeBtn.addEventListener('click', () => alert.remove());
+    setTimeout(() => alert.remove(), 3500);
 }
 
 // Tema oscuro/claro
@@ -176,11 +186,11 @@ function initThemeToggle() {
         if (document.body.classList.contains('dark-theme')) {
             localStorage.setItem('theme', 'dark');
             btn.innerHTML = '<i class="fas fa-sun"></i><span>Modo Claro</span>';
-            mostrarAlerta('Modo oscuro activado', 'info');
+                showAlert('Modo oscuro activado', 'info');
         } else {
             localStorage.setItem('theme', 'light');
             btn.innerHTML = '<i class="fas fa-moon"></i><span>Modo Oscuro</span>';
-            mostrarAlerta('Modo claro activado', 'info');
+                showAlert('Modo claro activado', 'info');
         }
     });
 }
@@ -193,7 +203,7 @@ function initPDFDownload() {
     if (!btn) return;
     
     btn.addEventListener('click', async () => {
-        mostrarAlerta('Generando PDF, por favor espera...', 'info');
+        showAlert('Generando PDF, por favor espera...', 'info');
         
         const themeContainer = document.querySelector('.theme-toggle-container');
         if (themeContainer) themeContainer.style.display = 'none';
@@ -206,10 +216,10 @@ function initPDFDownload() {
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             }).from(container).save();
-            mostrarAlerta('PDF generado exitosamente!', 'success');
+            showAlert('PDF generado exitosamente!', 'success');
         } catch (error) {
             console.error('Error:', error);
-            mostrarAlerta('Error al generar el PDF', 'error');
+            showAlert('Error al generar el PDF', 'error');
         } finally {
             if (themeContainer) themeContainer.style.display = 'flex';
         }
@@ -229,17 +239,17 @@ function initContactForm() {
         const mensaje = document.getElementById('message')?.value;
         
         if (!nombre || !email || !asunto || !mensaje) {
-            mostrarAlerta('Por favor, completa todos los campos', 'error');
+            showAlert('Por favor, completa todos los campos', 'error');
             return;
         }
         
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            mostrarAlerta('Por favor, ingresa un email válido', 'error');
+            showAlert('Por favor, ingresa un email válido', 'error');
             return;
         }
         
-        mostrarAlerta(`¡Gracias ${nombre}! Tu mensaje ha sido enviado.`, 'success');
+        showAlert(`¡Gracias ${nombre}! Tu mensaje ha sido enviado.`, 'success');
         form.reset();
         
         const mensajes = JSON.parse(localStorage.getItem('mensajes_contacto') || '[]');
@@ -254,8 +264,8 @@ function initContactForm() {
     });
 }
 
-// Efecto de escritura
-function efectoEscritura() {
+// Writing effect
+function writingEffect() {
     const titulo = document.querySelector('.titulo');
     if (titulo && titulo.textContent) {
         const texto = titulo.textContent;
@@ -277,9 +287,9 @@ function initSocialTooltips() {
     const socialLinks = document.querySelectorAll('.social-link');
     socialLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            if (link.getAttribute('href') === '#') {
+                if (link.getAttribute('href') === '#') {
                 e.preventDefault();
-                mostrarAlerta('Próximamente disponible', 'info');
+                showAlert('Próximamente disponible', 'info');
             }
         });
     });
@@ -313,9 +323,9 @@ function initInteractiveEffects() {
     if (contactInfo) {
         contactInfo.addEventListener('click', (e) => {
             const item = e.target.closest('span');
-            if (item) {
+                if (item) {
                 const texto = item.textContent.trim();
-                mostrarAlerta(`Contacto: ${texto}`, 'info');
+                showAlert(`Contacto: ${texto}`, 'info');
             }
         });
     }
@@ -381,7 +391,7 @@ function initLazyVideos() {
 }
 
 // ========== FUNCIÓN DE RESPALDO: Forzar cierre de pantalla de carga ==========
-function fuerzaCierrePantallaCarga() {
+function forceCloseScreen() {
     setTimeout(function() {
         const loadingScreen = document.getElementById('loading-screen');
         if (loadingScreen && loadingScreen.style.display !== 'none') {
@@ -399,18 +409,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initIntroVideo();
     
     // Respaldo: forzar cierre después de 5 segundos
-    fuerzaCierrePantallaCarga();
+    forceCloseScreen();
     
     // Cargar datos
-    cargarHabilidades();
-    actualizarContadorVisitas();
-    obtenerGitHubStats();
+    loadSkills();
+    countVisit();
+    getGitHubStats();
     
     // Inicializar funciones
     initThemeToggle();
     initPDFDownload();
     initContactForm();
-    efectoEscritura();
+    writingEffect();
     initSocialTooltips();
     initProgressBars();
     initInteractiveEffects();
@@ -418,10 +428,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Mensaje de bienvenida
     setTimeout(() => {
-        mostrarAlerta(`¡Bienvenido al CV de ${cvData.nombre}!`, 'success');
+        showAlert(`¡Bienvenido al CV de ${cvData.nombre}!`, 'success');
     }, 1200);
 });
 
 // Exportar para uso global
 window.cvData = cvData;
-window.mostrarAlerta = mostrarAlerta;
+window.showAlert = showAlert;

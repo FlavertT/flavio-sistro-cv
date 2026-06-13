@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flavio Sistro - CV Web</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
@@ -38,17 +37,18 @@
         <!-- HEADER -->
         <header class="header">
             <div class="profile-image">
-                <img src="DSC02494.jpg" alt="Flavio Sistro">
+                <img src="img/profile.jpg" alt="Flavio Sistro" loading="lazy">
             </div>
-            <h1 id="nombre">Flavio Sistro</h1>
-            <p class="titulo">Desarrollador en Formación | Narrativa Audiovisual</p>
+            <h1 id="cv-name"></h1>
+            <p id="cv-title"></p>
             <div class="contact-info">
-                <span><i class="fas fa-phone"></i> 0221 6122976</span>
-                <span><i class="fas fa-envelope"></i> fsistro@gmail.com</span>
-                <span><i class="fab fa-linkedin"></i> flavertptuntomov</span>
-                <span><i class="fab fa-github"></i> FlavertT</span>
-                <span><i class="fas fa-map-marker-alt"></i> La Plata, Argentina</span>
-            </div>
+                <span><i class="fas fa-phone"></i> <span id="cv-phone"></span></span>
+                <span><i class="fas fa-envelope"></i> <span id="cv-email"></span></span>
+                <span><i class="fab fa-linkedin"></i> <a id="cv-linkedin" target="_blank"></a></span>
+                <span><i class="fab fa-github"></i> <a id="cv-github" target="_blank"></a></span>
+                <span><i class="fas fa-map-marker-alt"></i> <span id="cv-location"></span></span>
+    </div>
+
         </header>
 
         <!-- Contenido principal -->
@@ -181,7 +181,8 @@
                         <iframe 
                             src="https://www.youtube-nocookie.com/embed/eY4jXLyNNV0" 
                             title="EL VUELO DEL MOSCARDÓN | Tráiler"
-                            frameborder="0" 
+                            frameborder="0"
+                            loading="lazy" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                             referrerpolicy="strict-origin-when-cross-origin" 
                             allowfullscreen>
@@ -206,8 +207,8 @@
                 <h2><i class="fas fa-industry"></i> Proyecto Industrial</h2>
                 <div class="video-card toyota-card">
                     <div class="video-container">
-                        <video controls poster="img/toyota-poster.jpg">
-                            <source src="AGOS.mp4" type="video/mp4">
+                        <video controls poster="img/toyota-poster.png">
+                            <source src="video/toyota.mp4" type="video/mp4">
                             Tu navegador no soporta el elemento de video.
                         </video>
                     </div>
@@ -253,7 +254,7 @@
         <!-- Footer -->
         <footer class="footer">
             <div class="social-links">
-                <a href="https://github.com/FlavertT" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://github.com/FlavertT" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-github"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>

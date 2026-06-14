@@ -139,7 +139,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-.profile-image img {
+.profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -199,7 +199,7 @@ body {
     transform: translateY(-0.1875rem);
 }
 
-.section h2 {
+.section-title {
     color: var(--color-primary);
     margin-bottom: 1.25rem;
     font-size: 1.4rem;
@@ -210,7 +210,7 @@ body {
     gap: 0.625rem;
 }
 
-.section h2 i {
+.section-title-icon {
     font-size: 1.3rem;
     color: var(--color-secondary);
 }
@@ -411,7 +411,7 @@ body {
     padding: 0 2.5rem 2.5rem 2.5rem;
 }
 
-.video-section h2 {
+.video-section-title {
     margin-bottom: 1.25rem;
 }
 
@@ -557,19 +557,11 @@ body {
 }
 
 .submit-btn {
-<<<<<<< HEAD
-    background: var(--color-primary);
-    color: var(--color-light);
-    border: none;
-    padding: 0.75rem 1.875rem;
-    border-radius: 1.875rem;
-=======
     background: var(--btn-bg);
     color: var(--btn-text);
-    border: 2px solid var(--btn-border);
-    padding: 12px 30px;
-    border-radius: 30px;
->>>>>>> 970b8b1c2df6c33390785b863eb874691b03a0b1
+    border: 0.125rem solid var(--btn-border);
+    padding: 0.75rem 1.875rem;
+    border-radius: 1.875rem;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
@@ -580,17 +572,11 @@ body {
 }
 
 .submit-btn:hover {
-<<<<<<< HEAD
-    background: var(--color-secondary);
-    color: var(--color-primary);
-    transform: translateY(-0.125rem);
-=======
     background: var(--btn-bg-hover);
     color: var(--btn-text-hover);
     border-color: var(--btn-text-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
->>>>>>> 970b8b1c2df6c33390785b863eb874691b03a0b1
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.15);
 }
 
 /* Footer */

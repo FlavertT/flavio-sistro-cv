@@ -195,36 +195,6 @@ function initThemeToggle() {
     });
 }
 
-// Descargar PDF
-function initPDFDownload() {
-    const btn = document.getElementById('download-pdf');
-    const container = document.getElementById('cv-container');
-    
-    if (!btn) return;
-    
-    btn.addEventListener('click', async () => {
-        showAlert('Generando PDF, por favor espera...', 'info');
-        
-        const themeContainer = document.querySelector('.theme-toggle-container');
-        if (themeContainer) themeContainer.style.display = 'none';
-        
-        try {
-            await html2pdf().set({
-                margin: 0.5,
-                filename: `CV_Flavio_Sistro.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            }).from(container).save();
-            showAlert('PDF generado exitosamente!', 'success');
-        } catch (error) {
-            console.error('Error:', error);
-            showAlert('Error al generar el PDF', 'error');
-        } finally {
-            if (themeContainer) themeContainer.style.display = 'flex';
-        }
-    });
-}
 
 // Formulario de contacto
 function initContactForm() {
@@ -418,7 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Inicializar funciones
     initThemeToggle();
-    initPDFDownload();
     initContactForm();
     writingEffect();
     initSocialTooltips();

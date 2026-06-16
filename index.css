@@ -91,6 +91,9 @@ body {
     align-items: center;
     gap: 0.5rem;
 }
+.download-btn {
+    text-decoration: none;
+}
 
 .theme-btn:hover, .download-btn:hover {
     transform: translateY(-0.125rem);
